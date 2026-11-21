@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> නිර්වාණ බෝධි වන්දනා </title>
+  <title>නිර්වාණ බෝධි වන්දනා</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -12,12 +12,14 @@
   />
   <style>
     :root {
-      --bg-cream: #f6efe0;
-      --bg-warm: #eadcb9;
-      --card-bg: #fbf7ec;
-      --gold-border: #d8be86;
-      --text-dark: #26221b;
-      --text-muted: #6e634f;
+      --bg-cream: #f8f2e4;
+      --bg-gold-light: #efe1be;
+      --bg-gold-mid: #e6d19c;
+      --card-bg: #fcf9f0;
+      --gold-border: #cbb06a;
+      --gold-inner: #e2cfa0;
+      --text-dark: #231f18;
+      --text-muted: #5c5342;
     }
 
     * {
@@ -32,116 +34,157 @@
       display: flex;
       flex-direction: column;
       color: var(--text-dark);
-      background:
-        radial-gradient(circle at 88% 18%, rgba(226, 198, 134, 0.45) 0%, transparent 42%),
-        radial-gradient(circle at 15% 88%, rgba(218, 188, 122, 0.35) 0%, transparent 45%),
-        linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-warm) 100%);
+      background-color: var(--bg-cream);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Sweeping Golden Background Waves matching prototype */
+    .bg-waves {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
     }
 
     /* Top Header */
     header {
-      display: flex;
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px 36px;
-      background: rgba(251, 247, 236, 0.72);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(216, 190, 134, 0.45);
+      padding: 14px 42px;
+      background: rgba(252, 249, 240, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(203, 176, 106, 0.4);
       font-family: system-ui, -apple-system, sans-serif;
       font-size: 0.9rem;
     }
 
     nav {
       display: flex;
-      gap: 20px;
+      gap: 22px;
     }
 
     nav a {
       text-decoration: none;
-      color: var(--text-muted);
+      color: var(--text-dark);
       font-weight: 500;
+      opacity: 0.85;
+      transition: opacity 0.2s;
     }
 
     nav a:hover {
-      color: var(--text-dark);
+      opacity: 1;
     }
 
     .brand {
-      font-family: "Noto Sans Sinhala", sans-serif;
-      font-weight: 700;
+      font-family: "Noto Sans Sinhala", system-ui, sans-serif;
+      font-weight: 600;
       font-size: 1.05rem;
       color: var(--text-dark);
+      text-align: center;
     }
 
-    .search-box input {
-      padding: 6px 14px;
+    .search-box {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 210px;
+    }
+
+    .search-wrapper input {
+      width: 100%;
+      padding: 7px 34px 7px 14px;
       border-radius: 999px;
-      border: 1px solid var(--gold-border);
+      border: 1px solid #d9c79b;
       background: #ffffff;
       font-size: 0.85rem;
       color: var(--text-dark);
       outline: none;
-      width: 190px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .search-wrapper svg {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      stroke: #8a7d65;
+      fill: none;
+      pointer-events: none;
     }
 
     /* Main Centered Card Area */
     main {
+      position: relative;
+      z-index: 5;
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px;
+      padding: 36px 20px 44px;
     }
 
-    .emblem {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      background: var(--card-bg);
-      border: 1px solid var(--gold-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: -24px;
-      z-index: 2;
-      box-shadow: 0 4px 12px rgba(90, 68, 26, 0.08);
-    }
-
-    .emblem svg {
-      width: 28px;
-      height: 28px;
-      fill: #c9a65b;
+    /* Bo Leaf Emblem sitting above the card */
+    .bo-leaf-emblem {
+      margin-bottom: -14px;
+      z-index: 6;
+      filter: drop-shadow(0 4px 8px rgba(130, 102, 42, 0.14));
     }
 
     .card {
       width: 100%;
-      max-width: 680px;
+      max-width: 780px;
       background: var(--card-bg);
       border: 1.5px solid var(--gold-border);
-      border-radius: 14px;
-      padding: 52px 36px 44px;
+      border-radius: 16px;
+      padding: 46px 40px 48px;
       text-align: center;
-      box-shadow: 0 14px 34px rgba(84, 63, 24, 0.08);
+      position: relative;
+      box-shadow:
+        0 18px 42px rgba(92, 70, 26, 0.11),
+        0 2px 6px rgba(92, 70, 26, 0.05);
+    }
+
+    /* Subtle inner gold frame */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid var(--gold-inner);
+      border-radius: 12px;
+      pointer-events: none;
     }
 
     h1 {
-      font-size: clamp(1.45rem, 2.8vw, 2rem);
-      font-weight: 700;
-      margin-bottom: 26px;
+      font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+      font-weight: 600;
+      margin-bottom: 28px;
       color: #1f1b14;
+      letter-spacing: 0.01em;
     }
 
     .verse p {
-      font-size: clamp(1.05rem, 1.9vw, 1.3rem);
-      line-height: 2;
-      color: #2b261e;
+      font-size: clamp(1.15rem, 2.1vw, 1.48rem);
+      line-height: 2.05;
+      color: #242019;
+      font-weight: 400;
     }
 
     .powered {
-      margin-top: 22px;
+      margin-top: 18px;
       font-family: system-ui, -apple-system, sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
     }
 
@@ -152,12 +195,14 @@
 
     /* Footer */
     footer {
+      position: relative;
+      z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 36px;
-      background: rgba(251, 247, 236, 0.72);
-      border-top: 1px solid rgba(216, 190, 134, 0.45);
+      padding: 14px 42px;
+      background: rgba(252, 249, 240, 0.85);
+      border-top: 1px solid rgba(203, 176, 106, 0.4);
       font-family: system-ui, -apple-system, sans-serif;
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -167,7 +212,7 @@
 
     .footer-links {
       display: flex;
-      gap: 18px;
+      gap: 20px;
     }
 
     .footer-links a {
@@ -179,21 +224,43 @@
       color: var(--text-dark);
     }
 
-    @media (max-width: 640px) {
-      header,
-      footer {
-        padding: 12px 18px;
+    @media (max-width: 720px) {
+      header {
+        grid-template-columns: 1fr auto;
+        padding: 12px 20px;
       }
       .search-box {
         display: none;
       }
+      footer {
+        padding: 12px 20px;
+      }
       .card {
-        padding: 44px 20px 36px;
+        padding: 36px 20px 38px;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Sweeping Gold Background Waves -->
+  <svg class="bg-waves" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="goldWave1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f7f0df" />
+        <stop offset="55%" stop-color="#ebd9ad" />
+        <stop offset="100%" stop-color="#dfc383" />
+      </linearGradient>
+      <linearGradient id="goldWave2" x1="100%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#e3c888" stop-opacity="0.55" />
+        <stop offset="100%" stop-color="#f8f2e4" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    <rect width="1440" height="900" fill="url(#goldWave1)" />
+    <path d="M920,0 C1150,220 1280,520 1120,900 L1440,900 L1440,0 Z" fill="url(#goldWave2)" />
+    <path d="M0,460 C240,420 420,620 340,900 L0,900 Z" fill="#e5cb8e" fill-opacity="0.32" />
+    <path d="M460,0 C680,180 860,120 1080,0 Z" fill="#ead49e" fill-opacity="0.4" />
+  </svg>
+
   <header>
     <nav aria-label="Primary Navigation">
       <a href="index.html">Home</a>
@@ -201,31 +268,72 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <div class="brand">ගාථා</div>
+    <div class="brand">ගාථා - Gatha</div>
     <div class="search-box">
-      <input type="search" placeholder="Search" aria-label="Search" />
+      <div class="search-wrapper">
+        <input type="search" placeholder="Search" aria-label="Search" />
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7" />
+          <line x1="20" y1="20" x2="16.2" y2="16.2" />
+        </svg>
+      </div>
     </div>
   </header>
 
   <main>
-    <div class="emblem" aria-hidden="true">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 2C8.5 6.8 6 10.4 6 13.5a6 6 0 0 0 12 0c0-3.1-2.5-6.7-6-11.5zm0 15.5a3.5 3.5 0 0 1-3.5-3.5c0-1.9 1.4-4.4 3.5-7.4 2.1 3 3.5 5.5 3.5 7.4a3.5 3.5 0 0 1-3.5 3.5z" />
+    <!-- Authentic Sacred Bo Leaf (Ficus religiosa) with Long Drip-Tip & Dharma Wheel -->
+    <div class="bo-leaf-emblem" aria-hidden="true">
+      <svg width="78" height="92" viewBox="0 0 100 118">
+        <defs>
+          <linearGradient id="leafFill" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f7edd4" />
+            <stop offset="60%" stop-color="#e7d29e" />
+            <stop offset="100%" stop-color="#d4b56a" />
+          </linearGradient>
+        </defs>
+        <!-- Heart-shaped Bo leaf blade tapering into its signature long tip -->
+        <path
+          d="M50 4 C51 16, 54 25, 63 34 C76 46, 85 60, 81 76 C77 90, 62 96, 50 88 C38 96, 23 90, 19 76 C15 60, 24 46, 37 34 C46 25, 49 16, 50 4 Z"
+          fill="url(#leafFill)"
+          stroke="#bfa054"
+          stroke-width="1.8"
+          stroke-linejoin="round"
+        />
+        <!-- Central midrib & delicate leaf veins -->
+        <path
+          d="M50 10 L50 96 M50 38 L37 47 M50 38 L63 47 M50 52 L28 63 M50 52 L72 63 M50 67 L25 78 M50 67 L75 78"
+          stroke="#b89749"
+          stroke-width="1.2"
+          stroke-linecap="round"
+          fill="none"
+          opacity="0.75"
+        />
+        <!-- Stem -->
+        <path d="M50 88 L50 106" stroke="#b89749" stroke-width="2" stroke-linecap="round" />
+        <!-- Small golden Dharma Wheel medallion at the base of the leaf -->
+        <circle cx="50" cy="79" r="10.5" fill="#fbf6e8" stroke="#bfa054" stroke-width="1.6" />
+        <circle cx="50" cy="79" r="3" fill="none" stroke="#bfa054" stroke-width="1.4" />
+        <path
+          d="M50 68.5 L50 89.5 M39.5 79 L60.5 79 M42.6 71.6 L57.4 86.4 M57.4 71.6 L42.6 86.4"
+          stroke="#bfa054"
+          stroke-width="1.2"
+        />
       </svg>
     </div>
 
     <article class="card">
-      <h1>නිර්වාණ බෝධි වන්දනා ගාථාව</h1>
+      <h1>නිර්වාණ බෝධි වන්දනා</h1>
       <div class="verse">
         <p>නාග ලොවේ සිට වැඩමෙව් සමිදේ</p>
         <p>අමත පරායණ බිමෙ රැස් විහිදේ</p>
         <p>දළු සුදු පැහැයෙන් බබළන සමිදේ</p>
         <p>අපිත් වදිමු නිර්වාණ බෝ සමිදේ</p>
       </div>
-      <p class="powered">
-        Powered by <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>
-      </p>
     </article>
+
+    <p class="powered">
+      Powered by <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>
+    </p>
   </main>
 
   <footer>
