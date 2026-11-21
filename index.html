@@ -83,11 +83,7 @@
       font-size: 11px;
     }
 
-    nav a, .footer-links a {
-      color: #403d35;
-      text-decoration: none;
-    }
-
+    nav a, .footer-links a { color: #403d35; text-decoration: none; }
     nav a:hover, .footer-links a:hover { color: #8c7338; }
 
     .brand {
@@ -99,10 +95,7 @@
 
     .search-box { display: flex; justify-self: end; }
 
-    .search-field {
-      position: relative;
-      width: 198px;
-    }
+    .search-field { position: relative; width: 198px; }
 
     .search-field input {
       width: 100%;
@@ -146,14 +139,42 @@
 
     .bo-emblem {
       position: absolute;
-      width: 80px;
-      height: 94px;
+      width: 112px;
+      height: 132px;
       left: 50%;
-      top: -78px;
+      top: -98px;
       transform: translateX(-50%);
+      transform-origin: 50% 100%;
       z-index: 4;
       overflow: visible;
-      filter: drop-shadow(0 2px 2px rgba(139, 113, 62, .12));
+      filter:
+        drop-shadow(0 5px 5px rgba(139, 113, 62, .16))
+        drop-shadow(0 1px 1px rgba(255, 255, 255, .8));
+      animation: leafBreathe 5.5s ease-in-out infinite;
+    }
+
+    .leaf-body {
+      transform-origin: 60px 102px;
+      animation: leafSway 5.5s ease-in-out infinite;
+    }
+
+    .leaf-highlight {
+      mix-blend-mode: screen;
+      opacity: .28;
+    }
+
+    @keyframes leafSway {
+      0%, 100% { transform: rotate(-1.2deg); }
+      50% { transform: rotate(1.4deg); }
+    }
+
+    @keyframes leafBreathe {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.018); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bo-emblem, .leaf-body { animation: none; }
     }
 
     .card {
@@ -192,10 +213,7 @@
       font: 7.5px Arial, Helvetica, sans-serif;
     }
 
-    .powered a {
-      color: #77715f;
-      text-decoration: underline;
-    }
+    .powered a { color: #77715f; text-decoration: underline; }
 
     footer {
       min-height: 50px;
@@ -207,55 +225,31 @@
       font: 9.5px Arial, Helvetica, sans-serif;
     }
 
-    .footer-links {
-      display: flex;
-      gap: 23px;
-    }
+    .footer-links { display: flex; gap: 23px; }
 
     @media (max-width: 900px) {
       header {
         padding: 0 24px;
         grid-template-columns: 1fr auto;
       }
-
       .brand { justify-self: end; }
       .search-box { display: none; }
-
       footer { padding: 12px 24px 0; }
       .card-wrapper { width: min(82%, 780px); }
     }
 
     @media (max-width: 560px) {
-      header {
-        height: 58px;
-      }
-
+      header { height: 58px; }
       nav { gap: 10px; }
       nav a { font-size: 10px; }
       .brand { font-size: 13px; }
-
-      main {
-        justify-content: flex-start;
-        padding-top: 105px;
-      }
-
-      .card-wrapper {
-        width: 92%;
-        margin-top: 42px;
-      }
-
-      .card {
-        min-height: 270px;
-        padding: 48px 14px 32px;
-      }
-
+      main { justify-content: flex-start; padding-top: 105px; }
+      .bo-emblem { width: 96px; height: 114px; top: -84px; }
+      .card-wrapper { width: 92%; margin-top: 42px; }
+      .card { min-height: 270px; padding: 48px 14px 32px; }
       h1 { font-size: 21px; }
       .verse p { font-size: 14.5px; line-height: 1.9; }
-
-      footer {
-        font-size: 8px;
-      }
-
+      footer { font-size: 8px; }
       .footer-links { gap: 8px; }
     }
   </style>
@@ -286,66 +280,90 @@
     <div class="card-wrapper">
       <svg class="bo-emblem" viewBox="0 0 120 140" aria-hidden="true">
         <defs>
-          <linearGradient id="leaf" x1="20%" y1="0%" x2="80%" y2="100%">
-            <stop offset="0%" stop-color="#fffdf7" />
-            <stop offset="55%" stop-color="#f8f2e5" />
-            <stop offset="100%" stop-color="#eae0ca" />
+          <radialGradient id="leafFace" cx="38%" cy="26%" r="78%">
+            <stop offset="0%" stop-color="#fffef7" />
+            <stop offset="28%" stop-color="#f7f1dc" />
+            <stop offset="72%" stop-color="#dde0b7" />
+            <stop offset="100%" stop-color="#bcc98b" />
+          </radialGradient>
+          <linearGradient id="leafEdge" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#cfce9c" />
+            <stop offset="50%" stop-color="#9eac70" />
+            <stop offset="100%" stop-color="#777d4c" />
           </linearGradient>
-          <linearGradient id="leafVein" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#c6b58c" stop-opacity=".35" />
-            <stop offset="50%" stop-color="#a99462" stop-opacity=".85" />
-            <stop offset="100%" stop-color="#c6b58c" stop-opacity=".35" />
+          <linearGradient id="leafVein" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d6cb9c" />
+            <stop offset="50%" stop-color="#9e955f" />
+            <stop offset="100%" stop-color="#7f7a50" />
           </linearGradient>
+          <filter id="soften"><feGaussianBlur stdDeviation=".18" /></filter>
         </defs>
 
-        <!-- Gently irregular, scalloped edge gives the Bo leaf a natural silhouette. -->
-        <path d="M60 7
-                 C59.5 15 61 22 63.5 29
-                 C65.5 35 70.5 40 77 45
-                 C82 49 87 54 90.5 60
-                 C91.8 62.3 91 64.2 88.8 64.4
-                 C93 68.5 96 73.2 97 78.5
-                 C97.5 81 96.2 82.4 93.8 81.8
-                 C97.2 87 98.2 92.4 96.2 97.2
-                 C95.3 99.3 93.5 100 91.8 98.5
-                 C90.5 106.3 86 111.2 79.5 113.1
-                 C73.2 115 66.4 112 60 107
-                 C53.6 112 46.8 115 40.5 113.1
-                 C34 111.2 29.5 106.3 28.2 98.5
-                 C26.5 100 24.7 99.3 23.8 97.2
-                 C21.8 92.4 22.8 87 26.2 81.8
-                 C23.8 82.4 22.5 81 23 78.5
-                 C24 73.2 27 68.5 31.2 64.4
-                 C29 64.2 28.2 62.3 29.5 60
-                 C33 54 38 49 43 45
-                 C49.5 40 54.5 35 56.5 29
-                 C59 22 60.5 15 60 7 Z"
-              fill="url(#leaf)" stroke="#c2b187" stroke-width="1.5" stroke-linejoin="round" />
+        <g class="leaf-body">
+          <!-- Lively, asymmetric Bo leaf outline with a pronounced drip tip. -->
+          <path d="M60 5
+                   C57.8 13.5 60.2 22.2 64.5 29.5
+                   C68.8 36.8 74.8 40.8 80.8 46.2
+                   C86.5 51.3 91.4 56.8 94.2 63.5
+                   C96.7 69.4 96.4 74.8 92.6 78.5
+                   C96.5 82.2 98.8 87.2 98.1 92
+                   C97.6 96.2 94.8 99.1 91.4 99.4
+                   C91.1 106.2 86.7 112.2 80.2 115.1
+                   C73.4 118.1 66.2 114.7 60 107.8
+                   C53.8 114.7 46.6 118.1 39.8 115.1
+                   C33.3 112.2 28.9 106.2 28.6 99.4
+                   C25.2 99.1 22.4 96.2 21.9 92
+                   C21.2 87.2 23.5 82.2 27.4 78.5
+                   C23.6 74.8 23.3 69.4 25.8 63.5
+                   C28.6 56.8 33.5 51.3 39.2 46.2
+                   C45.2 40.8 51.2 36.8 55.5 29.5
+                   C59.8 22.2 62.2 13.5 60 5 Z"
+                fill="url(#leafFace)" stroke="url(#leafEdge)" stroke-width="1.45"
+                stroke-linejoin="round" />
 
-        <!-- Main midrib and delicate curved veins follow the leaf's form. -->
-        <g fill="none" stroke="url(#leafVein)" stroke-width="1.15" stroke-linecap="round">
-          <path d="M60 13 C60.3 35 59.7 61 60 105" />
-          <path d="M60 43 C53 45 47 49 42 55" />
-          <path d="M60 43 C67 45 73 49 78 55" />
-          <path d="M60 56 C50 59 42 65 35 73" />
-          <path d="M60 56 C70 59 78 65 85 73" />
-          <path d="M60 70 C49 74 41 81 33 90" />
-          <path d="M60 70 C71 74 79 81 87 90" />
-          <path d="M60 84 C50 88 44 95 39 102" />
-          <path d="M60 84 C70 88 76 95 81 102" />
-        </g>
+          <!-- Subtle leaf-light sweep. -->
+          <path class="leaf-highlight"
+                d="M60 8 C53 28 41 43 32 58 C27 66 26 75 29 81 C37 69 47 59 60 48 C67 38 69 24 60 8 Z"
+                fill="#ffffff" />
 
-        <g transform="translate(60 97)">
-          <circle r="17" fill="#efdfb7" stroke="#aa9152" stroke-width="1.2" />
-          <circle r="12.7" fill="#fffaf0" stroke="#b39a5e" stroke-width="1.2" />
-          <g stroke="#aa9152" stroke-width="1.7" stroke-linecap="round">
-            <line x1="0" y1="-12.5" x2="0" y2="12.5" />
-            <line x1="-12.5" y1="0" x2="12.5" y2="0" />
-            <line x1="-8.8" y1="-8.8" x2="8.8" y2="8.8" />
-            <line x1="8.8" y1="-8.8" x2="-8.8" y2="8.8" />
+          <!-- Central vein and irregular natural branch veins. -->
+          <g fill="none" stroke="url(#leafVein)" stroke-linecap="round">
+            <path d="M60 10 C60.7 34 59.4 68 60 106" stroke-width="1.55" />
+            <path d="M60 43 C51.8 44.7 44.7 50.3 38.3 57.4" stroke-width="1.08" />
+            <path d="M60 43 C68.2 44.7 75.3 50.3 81.7 57.4" stroke-width="1.08" />
+            <path d="M60 57 C48.8 59.4 39.7 66.8 32.4 76.2" stroke-width="1.05" />
+            <path d="M60 57 C71.2 59.4 80.3 66.8 87.6 76.2" stroke-width="1.05" />
+            <path d="M60 72 C48.2 76.2 39.2 84.8 32.7 93.9" stroke-width="1.02" />
+            <path d="M60 72 C71.8 76.2 80.8 84.8 87.3 93.9" stroke-width="1.02" />
+            <path d="M60 87 C51 91 44.8 98.1 40.5 105.8" stroke-width=".92" />
+            <path d="M60 87 C69 91 75.2 98.1 79.5 105.8" stroke-width=".92" />
           </g>
-          <circle r="4.7" fill="#dabf79" stroke="#aa9152" stroke-width="1.2" />
-          <circle r="1.7" fill="#fffaf0" />
+
+          <!-- Fine edge waves make the perimeter feel organic rather than geometric. -->
+          <g fill="none" stroke="#929b64" stroke-width=".48" opacity=".58" filter="url(#soften)">
+            <path d="M27 64 Q29 59 33 56 M24 75 Q27 73 29 70 M23 88 Q26 85 29 83 M31 108 Q35 111 39 112" />
+            <path d="M93 64 Q91 59 87 56 M96 75 Q93 73 91 70 M97 88 Q94 85 91 83 M89 108 Q85 111 81 112" />
+          </g>
+
+          <!-- Dharma chakra remains the visual anchor. -->
+          <g transform="translate(60 101)">
+            <circle r="18" fill="#f1e2b3" stroke="#a78b48" stroke-width="1.15" />
+            <circle r="13.8" fill="#fffaf0" stroke="#b59a57" stroke-width="1.05" />
+            <g stroke="#a78b48" stroke-width="1.65" stroke-linecap="round">
+              <line x1="0" y1="-13.5" x2="0" y2="13.5" />
+              <line x1="-13.5" y1="0" x2="13.5" y2="0" />
+              <line x1="-9.55" y1="-9.55" x2="9.55" y2="9.55" />
+              <line x1="9.55" y1="-9.55" x2="-9.55" y2="9.55" />
+            </g>
+            <circle r="5" fill="#d8be7d" stroke="#a78b48" stroke-width="1.05" />
+            <circle r="1.8" fill="#fffaf0" />
+            <g fill="#b99c56">
+              <circle cx="0" cy="-18" r="1.3" /><circle cx="0" cy="18" r="1.3" />
+              <circle cx="-18" cy="0" r="1.3" /><circle cx="18" cy="0" r="1.3" />
+              <circle cx="-12.7" cy="-12.7" r="1.3" /><circle cx="12.7" cy="12.7" r="1.3" />
+              <circle cx="12.7" cy="-12.7" r="1.3" /><circle cx="-12.7" cy="12.7" r="1.3" />
+            </g>
+          </g>
         </g>
       </svg>
 
