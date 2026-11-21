@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Sinhala:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
   <style>
@@ -17,7 +17,8 @@
       --border-gold-dark: #a68743;
       --text-primary: #221e17;
       --text-secondary: #5a5243;
-      --sage-accent: #556b4d;
+      --sage-deep: #486349;
+      --cream-halo: #fdfaf2;
     }
 
     * {
@@ -37,7 +38,7 @@
       overflow-x: hidden;
     }
 
-    /* Seamless Background Curves */
+    /* Sweeping Golden Background Curves */
     .bg-canvas {
       position: fixed;
       inset: 0;
@@ -56,12 +57,13 @@
       align-items: center;
       padding: 18px 48px;
       background: transparent;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 0.9rem;
     }
 
     nav {
       display: flex;
+      align-items: center;
       gap: 24px;
     }
 
@@ -72,6 +74,11 @@
       transition: color 0.2s ease;
     }
 
+    nav a.nav-si {
+      font-family: "Noto Sans Sinhala", "Iskoola Pota", sans-serif;
+      font-size: 0.94rem;
+    }
+
     nav a:hover {
       color: #8c6d2e;
     }
@@ -79,7 +86,7 @@
     .brand {
       font-family: "Noto Sans Sinhala", sans-serif;
       font-size: 1.08rem;
-      font-weight: 500;
+      font-weight: 600;
       color: #2b261d;
       letter-spacing: 0.01em;
     }
@@ -130,15 +137,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 28px 24px 40px;
+      padding: 36px 24px 48px;
     }
 
-    /* Split Side-Car Card Container */
     .split-wrapper {
       position: relative;
       width: 100%;
       max-width: 1040px;
-      margin-top: 38px;
+      margin-top: 44px;
     }
 
     .split-card {
@@ -156,41 +162,33 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
 
-    /* Left Column: Sacred Gatha & Overlapping Leaf Medallion */
-    .gatha-pane {
-      position: relative;
-      padding: 64px 44px 52px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      border-right: 1px solid rgba(191, 160, 90, 0.35);
-    }
-
-    /* Overlapping Variegated Leaf Stamp + Mini Dharma Chakra */
+    /* Clean Circular Variegated Bo Leaf Medallion Centered at Top of Card */
     .leaf-medallion {
       position: absolute;
       top: -46px;
       left: 50%;
       transform: translateX(-50%);
-      width: 88px;
-      height: 88px;
+      width: 92px;
+      height: 92px;
       border-radius: 50%;
-      background: #fdfaf2;
+      background: var(--cream-halo);
       border: 2px solid var(--border-gold);
       padding: 4px;
       box-shadow:
-        0 6px 18px rgba(74, 56, 20, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      z-index: 8;
+        0 0 0 5px rgba(253, 250, 242, 0.85),
+        0 8px 20px rgba(74, 56, 20, 0.16),
+        inset 0 0 0 1px rgba(191, 160, 90, 0.45);
+      z-index: 12;
       cursor: zoom-in;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .leaf-medallion:hover {
       transform: translateX(-50%) scale(1.06);
-      box-shadow: 0 10px 24px rgba(74, 56, 20, 0.24);
+      box-shadow:
+        0 0 0 6px rgba(253, 250, 242, 0.95),
+        0 12px 26px rgba(74, 56, 20, 0.22),
+        inset 0 0 0 1.5px rgba(166, 135, 67, 0.75);
     }
 
     .leaf-medallion img {
@@ -198,24 +196,97 @@
       height: 100%;
       object-fit: cover;
       border-radius: 50%;
+      border: 1px solid rgba(166, 135, 67, 0.45);
       display: block;
     }
 
-    .chakra-pin {
-      position: absolute;
-      bottom: -8px;
-      right: -4px;
-      width: 28px;
-      height: 28px;
-      filter: drop-shadow(0 2px 4px rgba(90, 65, 20, 0.25));
+    /* Left Column: Sacred Gatha Pane */
+    .gatha-pane {
+      position: relative;
+      padding: 64px 44px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-right: 1px solid rgba(191, 160, 90, 0.35);
+      border-radius: 16px 0 0 16px;
+    }
+
+    /* Heading Row with Flanked Sculptural Dharma Chakras */
+    .heading-row {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .heading-chakra {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      transition: transform 0.35s ease;
+    }
+
+    .heading-chakra:hover {
+      transform: rotate(22.5deg) scale(1.06);
+    }
+
+    .dhamma-chakra-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 3px 8px rgba(96, 68, 20, 0.2));
     }
 
     h1 {
+      position: relative;
+      z-index: 2;
       font-size: clamp(1.65rem, 3vw, 2.35rem);
-      font-weight: 500;
+      font-weight: 600;
       color: #1f1b14;
-      margin-bottom: 26px;
+      margin: 0;
       line-height: 1.35;
+    }
+
+    /* Delicate Gold & Sage Horizontal Rule */
+    .title-divider {
+      position: relative;
+      z-index: 2;
+      width: min(260px, 75%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .title-divider::before,
+    .title-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(166, 135, 67, 0.65), rgba(85, 107, 77, 0.45));
+    }
+
+    .title-divider::after {
+      background: linear-gradient(270deg, transparent, rgba(166, 135, 67, 0.65), rgba(85, 107, 77, 0.45));
+    }
+
+    .divider-accent {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sage-deep);
+    }
+
+    .verse {
+      position: relative;
+      z-index: 2;
     }
 
     .verse p {
@@ -226,33 +297,38 @@
     }
 
     .leaf-note {
+      position: relative;
+      z-index: 2;
       margin-top: 24px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 14px;
+      padding: 7px 16px;
       border-radius: 999px;
-      background: rgba(235, 224, 196, 0.45);
-      border: 1px solid rgba(191, 160, 90, 0.35);
-      font-size: 0.82rem;
+      background: rgba(235, 224, 196, 0.5);
+      border: 1px solid rgba(166, 135, 67, 0.45);
+      font-family: "Noto Sans Sinhala", "Iskoola Pota", sans-serif;
+      font-size: 0.84rem;
       color: var(--text-secondary);
       cursor: pointer;
-      transition: background 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .leaf-note:hover {
-      background: rgba(235, 224, 196, 0.8);
+      background: rgba(235, 224, 196, 0.88);
+      border-color: rgba(166, 135, 67, 0.75);
+      color: var(--text-primary);
     }
 
     .leaf-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #f3eed9 45%, #556b4d 55%);
-      border: 1px solid #a68743;
+      background: radial-gradient(circle at 30% 30%, #f7efe0 38%, #4e6b50 45%);
+      border: 1px solid #8f7236;
     }
 
-    /* Right Column: Nagadipa Bo Tree Side-Car Showcase */
+    /* Right Column: Sacred Bo Tree Side-Car Showcase */
     .tree-pane {
       padding: 26px 26px 24px;
       display: flex;
@@ -276,6 +352,13 @@
       position: relative;
       overflow: hidden;
       cursor: zoom-in;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .arch-frame:hover {
+      box-shadow:
+        0 12px 26px rgba(74, 56, 20, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
     }
 
     .arch-frame img {
@@ -305,23 +388,11 @@
     }
 
     .tree-caption .sub-en {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 0.76rem;
       color: var(--text-secondary);
       margin-top: 2px;
       display: block;
-    }
-
-    .powered {
-      margin-top: 20px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    .powered a {
-      color: var(--text-secondary);
-      text-decoration: underline;
     }
 
     /* Footer */
@@ -333,7 +404,7 @@
       justify-content: space-between;
       padding: 16px 48px;
       background: transparent;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 0.82rem;
       color: var(--text-secondary);
       flex-wrap: wrap;
@@ -372,10 +443,10 @@
     }
 
     .lightbox-content {
-      background: #fdfbf6;
+      background: linear-gradient(180deg, #fdfbf6 0%, #f7f0de 100%);
       border: 2px solid var(--border-gold);
       border-radius: 16px;
-      padding: 14px;
+      padding: 16px;
       max-width: 560px;
       width: 100%;
       text-align: center;
@@ -422,7 +493,12 @@
       .gatha-pane {
         border-right: none;
         border-bottom: 1px solid rgba(191, 160, 90, 0.35);
-        padding: 60px 24px 36px;
+        border-radius: 16px 16px 0 0;
+        padding: 60px 24px 40px;
+      }
+      .heading-chakra {
+        width: 36px;
+        height: 36px;
       }
       .tree-pane {
         border-radius: 0 0 16px 16px;
@@ -449,7 +525,7 @@
   </style>
 </head>
 <body>
-  <!-- Sweeping Golden Curves -->
+  <!-- Sweeping Golden Background Curves -->
   <svg class="bg-canvas" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
     <defs>
       <linearGradient id="baseCream" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -482,10 +558,11 @@
     />
   </svg>
 
+  <!-- Top Navigation -->
   <header>
     <nav aria-label="Primary Navigation">
       <a href="index.html">Home</a>
-      <a href="bodhi-wandana.html">Gathas</a>
+      <a href="bodhi-wandana.html" class="nav-si">ගාථා</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
@@ -501,34 +578,38 @@
     </div>
   </header>
 
+  <!-- Main Stage -->
   <main>
     <div class="split-wrapper">
+      <!-- Clean Variegated Bo Leaf Medallion Centered at Top of Card -->
+      <div
+        class="leaf-medallion"
+        id="leafMedallionBtn"
+        role="button"
+        tabindex="0"
+        title="දළු සුදු පැහැයෙන් බබළන බෝධි පත්‍රය (Click to inspect)"
+      >
+        <img src="bo-leaf.jpeg" alt="දළු සුදු පැහැයෙන් බබළන බෝධි පත්‍රය" />
+      </div>
+
       <article class="split-card">
-        <!-- Left: Gatha Verse + Variegated Bo Leaf Medallion -->
+        <!-- Left Column: Sacred Gatha -->
         <div class="gatha-pane">
-          <div
-            class="leaf-medallion"
-            role="button"
-            tabindex="0"
-            title="සුදු පැහැති දළු සහිත බෝ පත්‍රය (View Bo Leaf)"
-            onclick="openLightbox('bo-leaf.jpeg', 'දළු සුදු පැහැයෙන් බබළන නිර්වාණ බෝධි පත්‍රය — Variegated Sacred Bo Leaf')"
-          >
-            <img src="bo-leaf.jpeg" alt="සුදු පැහැති දළු සහිත බෝ පත්‍රය" />
-            <!-- Golden Dharma Chakra Accent -->
-            <svg class="chakra-pin" viewBox="0 0 40 40" aria-hidden="true">
-              <circle cx="20" cy="20" r="16" fill="#e6c882" stroke="#9d7830" stroke-width="2" />
-              <circle cx="20" cy="20" r="11" fill="#fbf5e6" stroke="#9d7830" stroke-width="1.5" />
-              <g stroke="#9d7830" stroke-width="1.8" stroke-linecap="round">
-                <line x1="20" y1="9" x2="20" y2="31" />
-                <line x1="9" y1="20" x2="31" y2="20" />
-                <line x1="12.2" y1="12.2" x2="27.8" y2="27.8" />
-                <line x1="27.8" y1="12.2" x2="12.2" y2="27.8" />
-              </g>
-              <circle cx="20" cy="20" r="4" fill="#d8b464" stroke="#9d7830" stroke-width="1.5" />
-            </svg>
+          <div class="heading-row">
+            <div class="heading-chakra" id="headingChakraLeft" aria-hidden="true"></div>
+            <h1>නිර්වාණ බෝධි වන්දනා</h1>
+            <div class="heading-chakra" id="headingChakraRight" aria-hidden="true"></div>
           </div>
 
-          <h1>නිර්වාණ බෝධි වන්දනා</h1>
+          <!-- Delicate Gold & Sage Horizontal Rule -->
+          <div class="title-divider" aria-hidden="true">
+            <span class="divider-accent">
+              <svg width="16" height="16" viewBox="0 0 20 20">
+                <polygon points="10,2 17,10 10,18 3,10" fill="none" stroke="#a68743" stroke-width="1.3" />
+                <path d="M10 5.5 C12 8, 12.5 10.5, 10 14.5 C7.5 10.5, 8 8, 10 5.5 Z" fill="#556b4d" />
+              </svg>
+            </span>
+          </div>
 
           <div class="verse">
             <p>නාග ලොවේ සිට වැඩමෙව් සමිදේ</p>
@@ -537,42 +618,35 @@
             <p>අපිත් වදිමු නිර්වාණ බෝ සමිදේ</p>
           </div>
 
-          <button
-            type="button"
-            class="leaf-note"
-            onclick="openLightbox('bo-leaf.jpeg', 'දළු සුදු පැහැයෙන් බබළන නිර්වාණ බෝධි පත්‍රය — Variegated Sacred Bo Leaf')"
-          >
-            <span class="leaf-dot"></span>
+          <button type="button" class="leaf-note" id="leafPillBtn">
+            <span class="leaf-dot" aria-hidden="true"></span>
             <span>දළු සුදු පැහැති බෝ පත්‍රය බලන්න</span>
           </button>
         </div>
 
-        <!-- Right: Nagadipa Bo Tree Visual Showcase -->
+        <!-- Right Column: Nirwana Bo Tree Side-Car Showcase -->
         <aside class="tree-pane">
           <div
             class="arch-frame"
+            id="treeArchBtn"
             role="button"
             tabindex="0"
-            title="නාගදීප නිර්වාණ බෝධීන් වහන්සේ (Click to enlarge)"
-            onclick="openLightbox('bo-tree.jpeg', 'නාගදීප පුදබිමේ වැඩසිටින නිර්වාණ බෝධීන් වහන්සේ — Sacred Variegated Bo Tree at Nagadipa')"
+            title="නිර්වාණ බෝධීන් වහන්සේ (Click to enlarge)"
           >
-            <img src="bo-tree.jpeg" alt="නාගදීප පුදබිමේ වැඩසිටින නිර්වාණ බෝධීන් වහන්සේ" />
+            <img src="bo-tree.jpeg" alt="නිර්වාණ බෝධීන් වහන්සේ" />
           </div>
           <div class="tree-caption">
-            <span class="title-si">නාගදීප නිර්වාණ බෝධීන් වහන්සේ</span>
-            <span class="sub-en">Variegated Sacred Bo Tree · Nagadipa</span>
+            <span class="title-si">නිර්වාණ බෝධීන් වහන්සේ</span>
+            <span class="sub-en">Sacred Nirwana Bo Tree</span>
           </div>
         </aside>
       </article>
     </div>
-
-    <p class="powered">
-      Powered by <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>
-    </p>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <div>© Copyright GitHub Pages</div>
+    <div>© Copyright</div>
     <div class="footer-links">
       <a href="index.html">Copyright</a>
       <a href="about.html">About</a>
@@ -581,31 +655,148 @@
   </footer>
 
   <!-- Lightbox Modal -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxCaption">
     <div class="lightbox-content">
-      <button type="button" class="lightbox-close" aria-label="Close" onclick="closeLightbox()">×</button>
-      <img id="lightbox-img" src="" alt="" />
-      <p class="lightbox-caption" id="lightbox-caption"></p>
+      <button type="button" class="lightbox-close" id="closeLightboxBtn" aria-label="Close preview">×</button>
+      <img id="lightboxImg" src="" alt="" />
+      <p class="lightbox-caption" id="lightboxCaption"></p>
     </div>
   </div>
 
   <script>
-    function openLightbox(src, caption) {
-      const box = document.getElementById("lightbox");
-      document.getElementById("lightbox-img").src = src;
-      document.getElementById("lightbox-caption").textContent = caption;
-      box.classList.add("open");
-    }
+    (function () {
+      /**
+       * Renders a sculptural 8-spoked temple gold Dharma Chakra with turned spokes,
+       * outer rim lotus finials, bevelled golden rim, and central lotus rosette hub.
+       */
+      function buildChakraSVG(uid) {
+        const angles = [0, 45, 90, 135, 180, 225, 270, 315];
+        const spokesMarkup = angles
+          .map(
+            (deg) => `
+              <g transform="rotate(${deg})">
+                <path d="M-4.5,-24 L-3.2,-52 L-5.5,-56 L-3.2,-60 L-4.8,-82 L4.8,-82 L3.2,-60 L5.5,-56 L3.2,-52 L4.5,-24 Z"
+                      fill="url(#spokeGrad_${uid})" stroke="#7c5a19" stroke-width="0.9" />
+                <path d="M-3.5,-94 C-4.5,-101 -2,-105 0,-108 C2,-105 4.5,-101 3.5,-94 Z"
+                      fill="url(#rimGrad_${uid})" stroke="#7c5a19" stroke-width="0.9" />
+                <circle cx="0" cy="-93" r="3.4" fill="url(#hubGrad_${uid})" stroke="#7c5a19" stroke-width="0.8" />
+              </g>
+            `
+          )
+          .join("");
 
-    function closeLightbox(event) {
-      if (!event || event.target.id === "lightbox" || event.target.classList.contains("lightbox-close")) {
-        document.getElementById("lightbox").classList.remove("open");
+        const petalsMarkup = angles
+          .map(
+            (deg) => `
+              <ellipse cx="0" cy="-11.5" rx="3.4" ry="6.2" transform="rotate(${deg})" />
+            `
+          )
+          .join("");
+
+        return `
+          <svg class="dhamma-chakra-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="rimGrad_${uid}" x1="15%" y1="10%" x2="85%" y2="90%">
+                <stop offset="0%" stop-color="#f8e6b4" />
+                <stop offset="35%" stop-color="#dfb862" />
+                <stop offset="70%" stop-color="#b48a38" />
+                <stop offset="100%" stop-color="#87631f" />
+              </linearGradient>
+              <radialGradient id="hubGrad_${uid}" cx="38%" cy="35%" r="68%">
+                <stop offset="0%" stop-color="#fbf0cf" />
+                <stop offset="50%" stop-color="#d8af56" />
+                <stop offset="100%" stop-color="#8c6721" />
+              </radialGradient>
+              <linearGradient id="spokeGrad_${uid}" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#9e7629" />
+                <stop offset="45%" stop-color="#f5df9f" />
+                <stop offset="100%" stop-color="#8f6920" />
+              </linearGradient>
+            </defs>
+            <g transform="translate(110, 110)">
+              <g>${spokesMarkup}</g>
+              <path
+                fill-rule="evenodd"
+                d="M 0,-91 A 91,91 0 1,0 0,91 A 91,91 0 1,0 0,-91 Z M 0,-78 A 78,78 0 1,1 0,78 A 78,78 0 1,1 0,-78 Z"
+                fill="url(#rimGrad_${uid})"
+                stroke="#7c5a19"
+                stroke-width="1.2"
+              />
+              <circle r="86.5" fill="none" stroke="#fcf0cf" stroke-width="0.9" opacity="0.75" />
+              <circle r="82.5" fill="none" stroke="#7c5a19" stroke-width="0.9" opacity="0.65" />
+              <circle r="25" fill="url(#hubGrad_${uid})" stroke="#7c5a19" stroke-width="1.2" />
+              <circle r="19.5" fill="none" stroke="#fcf0cf" stroke-width="0.9" opacity="0.8" />
+              <g fill="#f7e4b2" stroke="#87631f" stroke-width="0.8">
+                ${petalsMarkup}
+              </g>
+              <circle r="6.2" fill="url(#rimGrad_${uid})" stroke="#7c5a19" stroke-width="1" />
+              <circle r="2.2" fill="#fdf6e3" />
+            </g>
+          </svg>
+        `;
       }
-    }
 
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeLightbox();
-    });
+      // Inject sculptural Dharma Chakras flanking the heading
+      document.getElementById("headingChakraLeft").innerHTML = buildChakraSVG("hl");
+      document.getElementById("headingChakraRight").innerHTML = buildChakraSVG("hr");
+
+      // Lightbox Preview Controls
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightboxImg");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+      const closeLightboxBtn = document.getElementById("closeLightboxBtn");
+
+      function openLightbox(src, alt, caption) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightboxCaption.textContent = caption;
+        lightbox.classList.add("open");
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+      }
+
+      const leafCaption = "දළු සුදු පැහැයෙන් බබළන බෝධි පත්‍රය — Variegated Sacred Bo Leaf";
+      const treeCaption = "නිර්වාණ බෝධීන් වහන්සේ — Sacred Nirwana Bo Tree";
+
+      const leafMedallionBtn = document.getElementById("leafMedallionBtn");
+      const treeArchBtn = document.getElementById("treeArchBtn");
+
+      leafMedallionBtn.addEventListener("click", () =>
+        openLightbox("bo-leaf.jpeg", "දළු සුදු පැහැයෙන් බබළන බෝධි පත්‍රය", leafCaption)
+      );
+      leafMedallionBtn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openLightbox("bo-leaf.jpeg", "දළු සුදු පැහැයෙන් බබළන බෝධි පත්‍රය", leafCaption);
+        }
+      });
+
+      document.getElementById("leafPillBtn").addEventListener("click", () =>
+        openLightbox("bo-leaf.jpeg", "දළු සුදු පැහැයෙන් බබළන බෝධි පත්‍රය", leafCaption)
+      );
+
+      treeArchBtn.addEventListener("click", () =>
+        openLightbox("bo-tree.jpeg", "නිර්වාණ බෝධීන් වහන්සේ", treeCaption)
+      );
+      treeArchBtn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openLightbox("bo-tree.jpeg", "නිර්වාණ බෝධීන් වහන්සේ", treeCaption);
+        }
+      });
+
+      closeLightboxBtn.addEventListener("click", closeLightbox);
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox();
+      });
+    })();
   </script>
 </body>
 </html>
