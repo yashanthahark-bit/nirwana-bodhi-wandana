@@ -152,6 +152,8 @@
       top: -78px;
       transform: translateX(-50%);
       z-index: 4;
+      overflow: visible;
+      filter: drop-shadow(0 2px 2px rgba(139, 113, 62, .12));
     }
 
     .card {
@@ -286,21 +288,51 @@
         <defs>
           <linearGradient id="leaf" x1="20%" y1="0%" x2="80%" y2="100%">
             <stop offset="0%" stop-color="#fffdf7" />
-            <stop offset="100%" stop-color="#f1ead9" />
+            <stop offset="55%" stop-color="#f8f2e5" />
+            <stop offset="100%" stop-color="#eae0ca" />
+          </linearGradient>
+          <linearGradient id="leafVein" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#c6b58c" stop-opacity=".35" />
+            <stop offset="50%" stop-color="#a99462" stop-opacity=".85" />
+            <stop offset="100%" stop-color="#c6b58c" stop-opacity=".35" />
           </linearGradient>
         </defs>
 
-        <path d="M60 7 C62 22 67 32 78 43 C94 59 101 76 96 94 C91 111 74 116 60 107 C46 116 29 111 24 94 C19 76 26 59 42 43 C53 32 58 22 60 7Z"
-              fill="url(#leaf)" stroke="#cbbb91" stroke-width="1.6" />
+        <!-- Gently irregular, scalloped edge gives the Bo leaf a natural silhouette. -->
+        <path d="M60 7
+                 C59.5 15 61 22 63.5 29
+                 C65.5 35 70.5 40 77 45
+                 C82 49 87 54 90.5 60
+                 C91.8 62.3 91 64.2 88.8 64.4
+                 C93 68.5 96 73.2 97 78.5
+                 C97.5 81 96.2 82.4 93.8 81.8
+                 C97.2 87 98.2 92.4 96.2 97.2
+                 C95.3 99.3 93.5 100 91.8 98.5
+                 C90.5 106.3 86 111.2 79.5 113.1
+                 C73.2 115 66.4 112 60 107
+                 C53.6 112 46.8 115 40.5 113.1
+                 C34 111.2 29.5 106.3 28.2 98.5
+                 C26.5 100 24.7 99.3 23.8 97.2
+                 C21.8 92.4 22.8 87 26.2 81.8
+                 C23.8 82.4 22.5 81 23 78.5
+                 C24 73.2 27 68.5 31.2 64.4
+                 C29 64.2 28.2 62.3 29.5 60
+                 C33 54 38 49 43 45
+                 C49.5 40 54.5 35 56.5 29
+                 C59 22 60.5 15 60 7 Z"
+              fill="url(#leaf)" stroke="#c2b187" stroke-width="1.5" stroke-linejoin="round" />
 
-        <g fill="none" stroke="#cbbb91" stroke-width="1.2" stroke-linecap="round">
-          <path d="M60 14 L60 106" />
-          <path d="M60 45 Q48 49 41 56" />
-          <path d="M60 45 Q72 49 79 56" />
-          <path d="M60 60 Q44 65 34 74" />
-          <path d="M60 60 Q76 65 86 74" />
-          <path d="M60 77 Q44 83 34 92" />
-          <path d="M60 77 Q76 83 86 92" />
+        <!-- Main midrib and delicate curved veins follow the leaf's form. -->
+        <g fill="none" stroke="url(#leafVein)" stroke-width="1.15" stroke-linecap="round">
+          <path d="M60 13 C60.3 35 59.7 61 60 105" />
+          <path d="M60 43 C53 45 47 49 42 55" />
+          <path d="M60 43 C67 45 73 49 78 55" />
+          <path d="M60 56 C50 59 42 65 35 73" />
+          <path d="M60 56 C70 59 78 65 85 73" />
+          <path d="M60 70 C49 74 41 81 33 90" />
+          <path d="M60 70 C71 74 79 81 87 90" />
+          <path d="M60 84 C50 88 44 95 39 102" />
+          <path d="M60 84 C70 88 76 95 81 102" />
         </g>
 
         <g transform="translate(60 97)">
