@@ -163,6 +163,24 @@
       opacity: .28;
     }
 
+    .chakra-wheel {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: chakraTurn 42s linear infinite;
+    }
+
+    .chakra-hub {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: hubPulse 3.8s ease-in-out infinite;
+    }
+
+    .chakra-glint {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: glint 4.6s ease-in-out infinite;
+    }
+
     @keyframes leafSway {
       0%, 100% { transform: rotate(-1.2deg); }
       50% { transform: rotate(1.4deg); }
@@ -173,8 +191,23 @@
       50% { transform: translateX(-50%) scale(1.018); }
     }
 
+    @keyframes chakraTurn {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes hubPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    @keyframes glint {
+      0%, 100% { opacity: .28; }
+      50% { opacity: .72; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .bo-emblem, .leaf-body { animation: none; }
+      .bo-emblem, .leaf-body, .chakra-wheel, .chakra-hub, .chakra-glint { animation: none; }
     }
 
     .card {
@@ -296,6 +329,17 @@
             <stop offset="50%" stop-color="#9e955f" />
             <stop offset="100%" stop-color="#7f7a50" />
           </linearGradient>
+          <linearGradient id="chakraGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#fff0bf" />
+            <stop offset="35%" stop-color="#e4c875" />
+            <stop offset="72%" stop-color="#bd9440" />
+            <stop offset="100%" stop-color="#8e6d2d" />
+          </linearGradient>
+          <radialGradient id="hubGold" cx="32%" cy="28%" r="75%">
+            <stop offset="0%" stop-color="#fff8df" />
+            <stop offset="58%" stop-color="#dfc574" />
+            <stop offset="100%" stop-color="#a77f35" />
+          </radialGradient>
           <filter id="soften"><feGaussianBlur stdDeviation=".18" /></filter>
         </defs>
 
@@ -345,23 +389,63 @@
             <path d="M93 64 Q91 59 87 56 M96 75 Q93 73 91 70 M97 88 Q94 85 91 83 M89 108 Q85 111 81 112" />
           </g>
 
-          <!-- Dharma chakra remains the visual anchor. -->
+          <!-- Detailed eight-spoked Dharma Chakra with a slow, calm rotation. -->
           <g transform="translate(60 101)">
-            <circle r="18" fill="#f1e2b3" stroke="#a78b48" stroke-width="1.15" />
-            <circle r="13.8" fill="#fffaf0" stroke="#b59a57" stroke-width="1.05" />
-            <g stroke="#a78b48" stroke-width="1.65" stroke-linecap="round">
-              <line x1="0" y1="-13.5" x2="0" y2="13.5" />
-              <line x1="-13.5" y1="0" x2="13.5" y2="0" />
-              <line x1="-9.55" y1="-9.55" x2="9.55" y2="9.55" />
-              <line x1="9.55" y1="-9.55" x2="-9.55" y2="9.55" />
+            <g class="chakra-wheel">
+              <!-- Layered rim with warm dimensional gold shading. -->
+              <circle r="19" fill="none" stroke="#8f7135" stroke-width=".8" opacity=".75" />
+              <circle r="17.4" fill="url(#chakraGold)" stroke="#9b7835" stroke-width="1.1" />
+              <circle r="15.1" fill="none" stroke="#fff0bd" stroke-width=".65" opacity=".9" />
+              <circle r="12.4" fill="#fffaf0" stroke="#a98743" stroke-width="1.05" />
+
+              <!-- Eight softly tapered spokes with fine parallel highlights. -->
+              <g stroke="#987638" stroke-width="1.45" stroke-linecap="round">
+                <line x1="0" y1="-12.1" x2="0" y2="12.1" />
+                <line x1="-12.1" y1="0" x2="12.1" y2="0" />
+                <line x1="-8.56" y1="-8.56" x2="8.56" y2="8.56" />
+                <line x1="8.56" y1="-8.56" x2="-8.56" y2="8.56" />
+              </g>
+              <g stroke="#fff2c8" stroke-width=".55" stroke-linecap="round" opacity=".9">
+                <line x1="1.05" y1="-11.2" x2="1.05" y2="11.2" />
+                <line x1="-11.2" y1="-1.05" x2="11.2" y2="-1.05" />
+                <line x1="-7.5" y1="-9.15" x2="7.5" y2="7.5" />
+                <line x1="9.15" y1="-7.5" x2="-7.5" y2="9.15" />
+              </g>
+
+              <!-- Delicate engraved ring and fine dotted outer beading. -->
+              <circle r="9.8" fill="none" stroke="#b69b5a" stroke-width=".55" opacity=".85" />
+              <circle r="18.15" fill="none" stroke="#f8e9b9" stroke-width=".65" stroke-dasharray=".7 2.7" />
+
+              <!-- Eight small lotus-like accents between the hub and outer rim. -->
+              <g fill="#f7e6b5" stroke="#a78646" stroke-width=".45">
+                <path d="M0-12.7 C-1.2-11.2-1.2-9.7 0-8.6 C1.2-9.7 1.2-11.2 0-12.7Z" />
+                <path d="M0-12.7 C-1.2-11.2-1.2-9.7 0-8.6 C1.2-9.7 1.2-11.2 0-12.7Z" transform="rotate(45)" />
+                <path d="M0-12.7 C-1.2-11.2-1.2-9.7 0-8.6 C1.2-9.7 1.2-11.2 0-12.7Z" transform="rotate(90)" />
+                <path d="M0-12.7 C-1.2-11.2-1.2-9.7 0-8.6 C1.2-9.7 1.2-11.2 0-12.7Z" transform="rotate(135)" />
+                <path d="M0-12.7 C-1.2-11.2-1.2-9.7 0-8.6 C1.2-9.7 1.2-11.2 0-12.7Z" transform="rotate(180)" />
+                <path d="M0-12.7 C-1.2-11.2-1.2-9.7 0-8.6 C1.2-9.7 1.2-11.2 0-12.7Z" transform="rotate(225)" />
+                <path d="M0-12.7 C-1.2-11.2-1.2-9.7 0-8.6 C1.2-9.7 1.2-11.2 0-12.7Z" transform="rotate(270)" />
+                <path d="M0-12.7 C-1.2-11.2-1.2-9.7 0-8.6 C1.2-9.7 1.2-11.2 0-12.7Z" transform="rotate(315)" />
+              </g>
+
+              <!-- Gold finials around the wheel rim. -->
+              <g fill="#d5b35e" stroke="#987638" stroke-width=".55">
+                <circle cx="0" cy="-19" r="1.35" />
+                <circle cx="13.44" cy="-13.44" r="1.35" />
+                <circle cx="19" cy="0" r="1.35" />
+                <circle cx="13.44" cy="13.44" r="1.35" />
+                <circle cx="0" cy="19" r="1.35" />
+                <circle cx="-13.44" cy="13.44" r="1.35" />
+                <circle cx="-19" cy="0" r="1.35" />
+                <circle cx="-13.44" cy="-13.44" r="1.35" />
+              </g>
             </g>
-            <circle r="5" fill="#d8be7d" stroke="#a78b48" stroke-width="1.05" />
-            <circle r="1.8" fill="#fffaf0" />
-            <g fill="#b99c56">
-              <circle cx="0" cy="-18" r="1.3" /><circle cx="0" cy="18" r="1.3" />
-              <circle cx="-18" cy="0" r="1.3" /><circle cx="18" cy="0" r="1.3" />
-              <circle cx="-12.7" cy="-12.7" r="1.3" /><circle cx="12.7" cy="12.7" r="1.3" />
-              <circle cx="12.7" cy="-12.7" r="1.3" /><circle cx="-12.7" cy="12.7" r="1.3" />
+
+            <!-- Gentle hub pulse and shimmering center, independent of the wheel spin. -->
+            <g class="chakra-hub">
+              <circle r="5.1" fill="url(#hubGold)" stroke="#937237" stroke-width="1" />
+              <circle r="2.3" fill="#fffaf0" stroke="#c2a459" stroke-width=".65" />
+              <circle class="chakra-glint" cx="-1.7" cy="-1.8" r="1" fill="#ffffff" />
             </g>
           </g>
         </g>
